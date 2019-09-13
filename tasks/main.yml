@@ -1,0 +1,16 @@
+---
+# tasks file for ansible-epel
+- name: configure epel repository
+  yum_repository:
+    name: epel-repo
+    file: epel
+    description: EPEL Repo
+    baseurl: http://download.fedoraproject.org/pub/epel/{{ ansible_distribution_major_version }}/$basearch
+    gpgcheck: yes
+    enabled: yes
+
+- name: install epel gpg key.
+  rpm_key:
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+    state: present
+
